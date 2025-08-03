@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joseph HAMDY KAMAL - Carte de Visite Digitale</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        :root {
+            --bg-page: #F8F5F2;
+            --text-primary: #1F2937;
+            --text-secondary: #4B5563;
+            --accent-color: #E57373;
+            --accent-color-rgb: 229, 115, 115;
+            --card-bg: rgba(255, 255, 255, 0.6);
+            --card-border: rgba(255, 255, 255, 0.9);
+            --link-bg: rgba(229, 115, 115, 0.05);
+        }
+
+        html.dark {
+            --bg-page: #111827;
+            --text-primary: #F3F4F6;
+            --text-secondary: #9CA3AF;
+            --accent-color: #F08080;
+            --accent-color-rgb: 240, 128, 128;
+            --card-bg: rgba(23, 31, 42, 0.7);
+            --card-border: rgba(55, 65, 81, 0.8);
+            --link-bg: rgba(240, 128, 128, 0.08);
+        }
+
+        body {
+            background-color: var(--bg-page);
+            transition: background-color 0.5s ease;
+        }
+
+        #card-container {
+            background-color: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            transition: background-color 0.5s ease, border-color 0.5s ease;
+        }
+
+        #background-canvas {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+        }
+        
+        .lang-btn.active {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .action-button {
+            transition: all 0.3s ease;
+        }
+        .action-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px -5px rgba(var(--accent-color-rgb), 0.4);
+        }
+
+        .contact-link {
+            background-color: var(--link-bg);
+            transition: all 0.3s ease;
+        }
+        .contact-link:hover {
+            background-color: rgba(var(--accent-color-rgb), 0.15);
+            transform: translateY(-2px);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <div id="card-container" class="relative w-full max-w-md rounded-3xl shadow-2xl p-6 sm:p-8 overflow-hidden">
+        
+        <canvas id="background-canvas"></canvas>
+
+        <div class="relative z-10">
+            <!-- CONTRÔLES -->
+            <div class="flex justify-between items-center mb-6">
+                <div class="flex border border-gray-300 dark:border-gray-600 rounded-lg p-1 bg-white/30 dark:bg-gray-800/30">
+                    <button class="lang-btn px-2 py-1 rounded-md text-sm text-gray-700 dark:text-gray-300" data-lang="fr">FR</button>
+                    <button class="lang-btn px-2 py-1 rounded-md text-sm text-gray-700 dark:text-gray-300" data-lang="en">EN</button>
+                    <button class="lang-btn px-2 py-1 rounded-md text-sm text-gray-700 dark:text-gray-300" data-lang="it">IT</button>
+                    <button class="lang-btn px-2 py-1 rounded-md text-sm text-gray-700 dark:text-gray-300" data-lang="ar">AR</button>
+                </div>
+                <button id="theme-toggle" class="p-2 rounded-lg bg-white/30 dark:bg-gray-800/30 text-gray-700 dark:text-yellow-400 border border-gray-300 dark:border-gray-600">
+                    <i id="theme-icon-sun" class="fas fa-sun w-5 h-5"></i>
+                    <i id="theme-icon-moon" class="fas fa-moon w-5 h-5 hidden"></i>
+                </button>
+            </div>
+
+            <!-- INFO PROFIL -->
+            <div class="flex flex-col items-center text-center">
+                <img class="w-32 h-32 rounded-full mb-4 ring-4 ring-offset-4 object-cover animate-float" src="joseph carte photo.png" alt="Photo de Joseph HAMDY KAMAL" style="--ring-color: var(--accent-color); --ring-offset-color: var(--bg-page);">
+                <h1 class="text-3xl font-bold mt-4" style="color: var(--text-primary);" data-lang-key="name">Joseph HAMDY KAMAL</h1>
+                <p class="mt-1 font-medium" style="color: var(--text-secondary);" data-lang-key="title">Chef de Projet Digital | UI/UX Designer</p>
+            </div>
+
+            <!-- BOUTONS D'ACTION -->
+            <div class="mt-8 grid grid-cols-2 gap-4">
+                <a href="https://josephhk-1.github.io/" target="_blank" class="action-button text-center w-full px-4 py-3 bg-gray-700 dark:bg-gray-600 text-white font-bold rounded-xl hover:bg-gray-800 dark:hover:bg-gray-500 shadow-lg flex items-center justify-center">
+                    <i class="fas fa-palette mr-2"></i>
+                    <span data-lang-key="portfolio">Portfolio</span>
+                </a>
+                <a href="https://josephhk-1.github.io/Khayal-Co/project-form.html?lang=fr" target="_blank" class="action-button text-center w-full px-4 py-3 text-white font-bold rounded-xl shadow-lg flex items-center justify-center" style="background-color: var(--accent-color);">
+                    <i class="fas fa-briefcase mr-2"></i>
+                    <span data-lang-key="website">Khayal-Co</span>
+                </a>
+            </div>
+
+            <!-- LIENS DE CONTACT -->
+            <div class="mt-6 space-y-3">
+                <a href="https://wa.me/33767117091" target="_blank" class="contact-link flex items-center p-3 rounded-xl">
+                    <i class="fab fa-whatsapp fa-lg w-6 text-center" style="color: var(--accent-color);"></i>
+                    <span class="ml-4 font-semibold" style="color: var(--text-primary);" data-lang-key="whatsapp">Contacter sur WhatsApp</span>
+                </a>
+                <a href="mailto:eng.joseph.h.kamal@gmail.com" class="contact-link flex items-center p-3 rounded-xl">
+                    <i class="fas fa-envelope fa-lg w-6 text-center" style="color: var(--accent-color);"></i>
+                    <span class="ml-4 font-semibold" style="color: var(--text-primary);" data-lang-key="email">M'envoyer un email</span>
+                </a>
+                <a href="https://www.linkedin.com/in/joseph-hamdy-kamal-5abb7b241/" target="_blank" class="contact-link flex items-center p-3 rounded-xl">
+                    <i class="fab fa-linkedin fa-lg w-6 text-center" style="color: var(--accent-color);"></i>
+                    <span class="ml-4 font-semibold" style="color: var(--text-primary);" data-lang-key="linkedin">Profil LinkedIn</span>
+                </a>
+                <button id="vcard-button" class="contact-link w-full flex items-center p-3 rounded-xl">
+                    <i class="fas fa-user-plus fa-lg w-6 text-center" style="color: var(--accent-color);"></i>
+                    <span class="ml-4 font-semibold" style="color: var(--text-primary);" data-lang-key="vcard">Ajouter aux contacts</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- TRADUCTIONS ---
+            const translations = {
+                fr: { name: "Joseph HAMDY KAMAL", title: "Chef de Projet Digital | UI/UX Designer", portfolio: "Portfolio", website: "Khayal-Co", whatsapp: "Contacter sur WhatsApp", email: "M'envoyer un email", linkedin: "Profil LinkedIn", vcard: "Ajouter aux contacts" },
+                en: { name: "Joseph HAMDY KAMAL", title: "Digital Project Manager | UI/UX Designer", portfolio: "Portfolio", website: "Khayal-Co", whatsapp: "Contact on WhatsApp", email: "Send me an email", linkedin: "LinkedIn Profile", vcard: "Add to contacts" },
+                it: { name: "Joseph HAMDY KAMAL", title: "Manager di Progetti Digitali | UI/UX Designer", portfolio: "Portfolio", website: "Khayal-Co", whatsapp: "Contatta su WhatsApp", email: "Inviami un'email", linkedin: "Profilo LinkedIn", vcard: "Aggiungi ai contatti" },
+                ar: { name: "جوزيف حمدي كمال", title: "مدير مشاريع رقمية | مصمم واجهات وتجربة مستخدم", portfolio: "أعمالي", website: "خيال كو", whatsapp: "تواصل عبر واتساب", email: "أرسل بريدًا إلكترونيًا", linkedin: "ملف لينكد إن", vcard: "أضف إلى جهات الاتصال" }
+            };
+
+            // --- GESTION LANGUE & THÈME ---
+            const langButtons = document.querySelectorAll('.lang-btn');
+            function setLanguage(lang) {
+                const T = translations[lang];
+                document.documentElement.lang = lang;
+                document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+                
+                document.querySelectorAll('[data-lang-key]').forEach(el => {
+                    const key = el.dataset.langKey;
+                    if (T?.[key]) el.textContent = T[key];
+                });
+
+                langButtons.forEach(btn => btn.classList.remove('active'));
+                document.querySelector(`.lang-btn[data-lang="${lang}"]`).classList.add('active');
+            }
+
+            langButtons.forEach(button => {
+                button.addEventListener('click', () => setLanguage(button.dataset.lang));
+            });
+
+            const themeToggle = document.getElementById('theme-toggle');
+            const sunIcon = document.getElementById('theme-icon-sun');
+            const moonIcon = document.getElementById('theme-icon-moon');
+            
+            function applyTheme(isDark) {
+                document.documentElement.classList.toggle('dark', isDark);
+                sunIcon.classList.toggle('hidden', isDark);
+                moonIcon.classList.toggle('hidden', !isDark);
+                if (animationFrameId) cancelAnimationFrame(animationFrameId);
+                initBackgroundShapes();
+                animateBackground();
+            }
+
+            themeToggle.addEventListener('click', () => {
+                applyTheme(!document.documentElement.classList.contains('dark'));
+            });
+
+            // --- TÉLÉCHARGEMENT VCARD ---
+            document.getElementById('vcard-button').addEventListener('click', () => {
+                const vCard = `BEGIN:VCARD\nVERSION:3.0\nFN:Joseph HAMDY KAMAL\nN:HAMDY KAMAL;Joseph;;;\nTITLE:Chef de Projet Digital & Designer\nTEL;TYPE=CELL,VOICE;VALUE=uri:tel:+33-7-67-11-70-91\nEMAIL:eng.joseph.h.kamal@gmail.com\nURL;TYPE=Portfolio:https://josephhk-1.github.io/\nURL;TYPE=work:https://josephhk-1.github.io/Khayal-Co/project-form.html?lang=fr\nORG:Khayal-Co\nEND:VCARD`;
+                const blob = new Blob([vCard], { type: 'text/vcard' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Joseph_HAMDY_KAMAL.vcf';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            });
+
+            // --- NOUVELLE ANIMATION CANVAS ---
+            const cardContainer = document.getElementById('card-container');
+            const canvas = document.getElementById('background-canvas');
+            const ctx = canvas.getContext('2d');
+            let backgroundShapes;
+            let animationFrameId;
+
+            function setCanvasSize() {
+                canvas.width = cardContainer.offsetWidth;
+                canvas.height = cardContainer.offsetHeight;
+            }
+            
+            // Classe pour les lignes (Ingénieur)
+            class Line {
+                constructor(x, y, length, speed, color) {
+                    this.x = x;
+                    this.y = y;
+                    this.length = length;
+                    this.speed = speed;
+                    this.color = color;
+                    this.isHorizontal = Math.random() > 0.5;
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.moveTo(this.x, this.y);
+                    if (this.isHorizontal) {
+                        ctx.lineTo(this.x + this.length, this.y);
+                    } else {
+                        ctx.lineTo(this.x, this.y + this.length);
+                    }
+                    ctx.strokeStyle = this.color;
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+                }
+                update() {
+                    if (this.isHorizontal) {
+                        this.x += this.speed;
+                        if (this.speed > 0 && this.x > canvas.width) {
+                            this.x = -this.length;
+                        } else if (this.speed < 0 && this.x < -this.length) {
+                            this.x = canvas.width;
+                        }
+                    } else {
+                        this.y += this.speed;
+                        if (this.speed > 0 && this.y > canvas.height) {
+                            this.y = -this.length;
+                        } else if (this.speed < 0 && this.y < -this.length) {
+                            this.y = canvas.height;
+                        }
+                    }
+                    this.draw();
+                }
+            }
+
+            // Classe pour les courbes (Designer)
+            class Curve {
+                constructor(startX, startY, speed, color) {
+                    this.x = startX;
+                    this.y = startY;
+                    this.speed = speed;
+                    this.color = color;
+                    this.angle = Math.random() * Math.PI * 2;
+                    this.amplitude = Math.random() * 50 + 20;
+                    this.frequency = Math.random() * 0.02 + 0.01;
+                    this.history = [];
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.moveTo(this.history[0].x, this.history[0].y);
+                    for (let i = 1; i < this.history.length; i++) {
+                        ctx.lineTo(this.history[i].x, this.history[i].y);
+                    }
+                    ctx.strokeStyle = this.color;
+                    ctx.lineWidth = 1;
+                    ctx.stroke();
+                }
+                update() {
+                    this.angle += this.frequency;
+                    this.x += this.speed;
+                    this.y += Math.sin(this.angle) * 0.5;
+
+                    this.history.push({x: this.x, y: this.y});
+                    if (this.history.length > 50) {
+                        this.history.shift();
+                    }
+
+                    if (this.x > canvas.width + 50) {
+                        this.x = -50;
+                        this.y = Math.random() * canvas.height;
+                        this.history = [];
+                    }
+                    
+                    if(this.history.length > 1) this.draw();
+                }
+            }
+
+            function initBackgroundShapes() {
+                const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim();
+                backgroundShapes = [];
+                // 3 Lignes
+                for(let i=0; i<3; i++){
+                    let x = Math.random() * canvas.width;
+                    let y = Math.random() * canvas.height;
+                    let length = Math.random() * 100 + 50;
+                    let speed = (Math.random() * 0.4 - 0.2);
+                    if(speed === 0) speed = 0.1;
+                    backgroundShapes.push(new Line(x, y, length, speed, accentColor));
+                }
+                // 3 Courbes
+                for(let i=0; i<3; i++){
+                    let x = Math.random() * canvas.width;
+                    let y = Math.random() * canvas.height;
+                    let speed = (Math.random() * 0.5 + 0.2);
+                    backgroundShapes.push(new Curve(x, y, speed, accentColor));
+                }
+            }
+
+            function animateBackground() {
+                animationFrameId = requestAnimationFrame(animateBackground);
+                ctx.clearRect(0,0,canvas.width,canvas.height);
+                for(let i=0; i<backgroundShapes.length; i++) {
+                    backgroundShapes[i].update();
+                }
+            }
+
+            // --- INITIALISATION ---
+            setCanvasSize();
+            const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
+            applyTheme(prefersDark);
+            setLanguage('fr');
+            
+            window.addEventListener('resize', () => {
+                clearTimeout(window.resizeTimer);
+                window.resizeTimer = setTimeout(() => {
+                    setCanvasSize();
+                    initBackgroundShapes();
+                }, 250);
+            });
+        });
+    </script>
+</body>
+</html>
