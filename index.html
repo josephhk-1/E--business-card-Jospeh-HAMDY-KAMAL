@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Joseph HAMDY KAMAL - Carte de Visite Digitale</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
@@ -19,30 +24,34 @@
         }
 
         :root {
+            --bg-page: #0f2027;
+            --text-primary: #F3F4F6;
+            --text-secondary: #9CA3AF;
+            --accent-color: #2c5364;
+            --accent-color-rgb: 44, 83, 100;
+            --card-bg: rgba(23, 31, 42, 0.7);
+            --card-border: rgba(55, 65, 81, 0.8);
+            --link-bg: rgba(44, 83, 100, 0.08);
+        }
+
+        html.light {
             --bg-page: #F8F5F2;
             --text-primary: #1F2937;
             --text-secondary: #4B5563;
-            --accent-color: #E57373;
-            --accent-color-rgb: 229, 115, 115;
+            --accent-color: #2c5364;
+            --accent-color-rgb: 44, 83, 100;
             --card-bg: rgba(255, 255, 255, 0.6);
             --card-border: rgba(255, 255, 255, 0.9);
-            --link-bg: rgba(229, 115, 115, 0.05);
-        }
-
-        html.dark {
-            --bg-page: #111827;
-            --text-primary: #F3F4F6;
-            --text-secondary: #9CA3AF;
-            --accent-color: #F08080;
-            --accent-color-rgb: 240, 128, 128;
-            --card-bg: rgba(23, 31, 42, 0.7);
-            --card-border: rgba(55, 65, 81, 0.8);
-            --link-bg: rgba(240, 128, 128, 0.08);
+            --link-bg: rgba(44, 83, 100, 0.05);
         }
 
         body {
-            background-color: var(--bg-page);
-            transition: background-color 0.5s ease;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            transition: background 0.5s ease;
+        }
+
+        html.light body {
+            background: linear-gradient(135deg, #F8F5F2 0%, #E8E5E2 100%);
         }
 
         #card-container {
@@ -50,7 +59,7 @@
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--card-border);
-            transition: background-color 0.5s ease, border-color 0.5s ease;
+            transition: all 0.5s ease;
         }
 
         #background-canvas {
@@ -67,6 +76,7 @@
 
         .action-button {
             transition: all 0.3s ease;
+            background-color: var(--accent-color);
         }
         .action-button:hover {
             transform: scale(1.05);
@@ -90,6 +100,98 @@
         .animate-float {
             animation: float 6s ease-in-out infinite;
         }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.15);
+            box-shadow: 0 6px 15px rgba(44, 83, 100, 0.4);
+        }
+
+        .linkedin-icon { background: #0A66C2; }
+        .whatsapp-icon { background: #25D366; }
+        .gmail-icon { background: #EA4335; }
+        .portfolio-icon { background: #6C63FF; }
+
+        .social-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* Utility classes */
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .justify-between { align-items: center; justify-content: space-between; }
+        .flex-col { flex-direction: column; }
+        .min-h-screen { min-height: 100vh; }
+        .p-4 { padding: 1rem; }
+        .p-2 { padding: 0.5rem; }
+        .p-3 { padding: 0.75rem; }
+        .p-1 { padding: 0.25rem; }
+        .px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+        .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+        .px-4 { padding-left: 1rem; padding-right: 1rem; }
+        .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mt-4 { margin-top: 1rem; }
+        .mt-1 { margin-top: 0.25rem; }
+        .mt-8 { margin-top: 2rem; }
+        .mt-6 { margin-top: 1.5rem; }
+        .ml-4 { margin-left: 1rem; }
+        .mr-2 { margin-right: 0.5rem; }
+        .w-full { width: 100%; }
+        .w-6 { width: 1.5rem; }
+        .w-5 { width: 1.25rem; }
+        .h-5 { height: 1.25rem; }
+        .max-w-md { max-width: 28rem; }
+        .relative { position: relative; }
+        .z-10 { z-index: 10; }
+        .overflow-hidden { overflow: hidden; }
+        .border { border-width: 1px; }
+        .rounded-lg { border-radius: 0.5rem; }
+        .rounded-md { border-radius: 0.375rem; }
+        .rounded-xl { border-radius: 0.75rem; }
+        .rounded-3xl { border-radius: 1.5rem; }
+        .rounded-full { border-radius: 9999px; }
+        .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
+        .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+        .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+        .text-xs { font-size: 0.75rem; line-height: 1rem; }
+        .text-center { text-align: center; }
+        .text-white { color: white; }
+        .font-bold { font-weight: 700; }
+        .font-semibold { font-weight: 600; }
+        .font-medium { font-weight: 500; }
+        .grid { display: grid; }
+        .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .gap-4 { gap: 1rem; }
+        .space-y-3 > * + * { margin-top: 0.75rem; }
+        .object-cover { object-fit: cover; }
+        .ring-4 { box-shadow: 0 0 0 4px var(--accent-color); }
+        .ring-offset-4 { box-shadow: 0 0 0 4px var(--bg-page), 0 0 0 8px var(--accent-color); }
+        .hidden { display: none; }
+        .w-32 { width: 8rem; }
+        .h-32 { height: 8rem; }
+        .sm\:p-8 { padding: 2rem; }
+
+        @media (min-width: 640px) {
+            .sm\:p-8 { padding: 2rem; }
+        }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen p-4">
@@ -101,55 +203,80 @@
         <div class="relative z-10">
             <!-- CONTRÔLES -->
             <div class="flex justify-between items-center mb-6">
-                <div class="flex border border-gray-300 dark:border-gray-600 rounded-lg p-1 bg-white/30 dark:bg-gray-800/30">
-                    <button class="lang-btn px-2 py-1 rounded-md text-sm text-gray-700 dark:text-gray-300" data-lang="fr">FR</button>
-                    <button class="lang-btn px-2 py-1 rounded-md text-sm text-gray-700 dark:text-gray-300" data-lang="en">EN</button>
-                    <button class="lang-btn px-2 py-1 rounded-md text-sm text-gray-700 dark:text-gray-300" data-lang="it">IT</button>
-                    <button class="lang-btn px-2 py-1 rounded-md text-sm text-gray-700 dark:text-gray-300" data-lang="ar">AR</button>
+                <div class="flex border rounded-lg p-1" style="border-color: var(--card-border); background: rgba(255,255,255,0.1);">
+                    <button class="lang-btn px-2 py-1 rounded-md text-sm" style="color: var(--text-secondary);" data-lang="fr">FR</button>
+                    <button class="lang-btn px-2 py-1 rounded-md text-sm" style="color: var(--text-secondary);" data-lang="en">EN</button>
+                    <button class="lang-btn px-2 py-1 rounded-md text-sm" style="color: var(--text-secondary);" data-lang="it">IT</button>
+                    <button class="lang-btn px-2 py-1 rounded-md text-sm" style="color: var(--text-secondary);" data-lang="ar">AR</button>
                 </div>
-                <button id="theme-toggle" class="p-2 rounded-lg bg-white/30 dark:bg-gray-800/30 text-gray-700 dark:text-yellow-400 border border-gray-300 dark:border-gray-600">
-                    <i id="theme-icon-sun" class="fas fa-sun w-5 h-5"></i>
-                    <i id="theme-icon-moon" class="fas fa-moon w-5 h-5 hidden"></i>
+                <button id="theme-toggle" class="p-2 rounded-lg border" style="background: rgba(255,255,255,0.1); border-color: var(--card-border); color: var(--text-primary);">
+                    <i id="theme-icon-sun" class="fas fa-sun w-5 h-5 hidden"></i>
+                    <i id="theme-icon-moon" class="fas fa-moon w-5 h-5"></i>
                 </button>
             </div>
 
             <!-- INFO PROFIL -->
             <div class="flex flex-col items-center text-center">
-                <img class="w-32 h-32 rounded-full mb-4 ring-4 ring-offset-4 object-cover animate-float" src="joseph carte photo.png" alt="Photo de Joseph HAMDY KAMAL" style="--ring-color: var(--accent-color); --ring-offset-color: var(--bg-page);">
+                <img class="w-32 h-32 rounded-full mb-4 ring-4 ring-offset-4 object-cover animate-float" src="joseph carte photo.png" alt="Photo de Joseph HAMDY KAMAL" style="ring-color: var(--accent-color); ring-offset-color: var(--bg-page);">
                 <h1 class="text-3xl font-bold mt-4" style="color: var(--text-primary);" data-lang-key="name">Joseph HAMDY KAMAL</h1>
-                <p class="mt-1 font-medium" style="color: var(--text-secondary);" data-lang-key="title">Chef de Projet Digital | UI/UX Designer</p>
+                <p class="mt-1 font-medium" style="color: var(--text-secondary);" data-lang-key="title">Transformation numérique en motion</p>
             </div>
 
             <!-- BOUTONS D'ACTION -->
             <div class="mt-8 grid grid-cols-2 gap-4">
-                <a href="https://josephhk-1.github.io/" target="_blank" class="action-button text-center w-full px-4 py-3 bg-gray-700 dark:bg-gray-600 text-white font-bold rounded-xl hover:bg-gray-800 dark:hover:bg-gray-500 shadow-lg flex items-center justify-center">
+                <a href="https://josephhk-1.github.io/" target="_blank" class="action-button text-center w-full px-4 py-3 text-white font-bold rounded-xl shadow-lg flex items-center justify-center">
                     <i class="fas fa-palette mr-2"></i>
                     <span data-lang-key="portfolio">Portfolio</span>
                 </a>
-                <a href="https://josephhk-1.github.io/Khayal-Co/project-form.html?lang=fr" target="_blank" class="action-button text-center w-full px-4 py-3 text-white font-bold rounded-xl shadow-lg flex items-center justify-center" style="background-color: var(--accent-color);">
-                    <i class="fas fa-briefcase mr-2"></i>
-                    <span data-lang-key="website">Khayal-Co</span>
-                </a>
+                <button id="vcard-button" class="action-button text-center w-full px-4 py-3 text-white font-bold rounded-xl shadow-lg flex items-center justify-center">
+                    <i class="fas fa-user-plus mr-2"></i>
+                    <span data-lang-key="vcard">Contact</span>
+                </button>
             </div>
 
             <!-- LIENS DE CONTACT -->
             <div class="mt-6 space-y-3">
                 <a href="https://wa.me/33767117091" target="_blank" class="contact-link flex items-center p-3 rounded-xl">
                     <i class="fab fa-whatsapp fa-lg w-6 text-center" style="color: var(--accent-color);"></i>
-                    <span class="ml-4 font-semibold" style="color: var(--text-primary);" data-lang-key="whatsapp">Contacter sur WhatsApp</span>
+                    <span class="ml-4 font-semibold" style="color: var(--text-primary);" data-lang-key="whatsapp">WhatsApp</span>
                 </a>
                 <a href="mailto:eng.joseph.h.kamal@gmail.com" class="contact-link flex items-center p-3 rounded-xl">
                     <i class="fas fa-envelope fa-lg w-6 text-center" style="color: var(--accent-color);"></i>
-                    <span class="ml-4 font-semibold" style="color: var(--text-primary);" data-lang-key="email">M'envoyer un email</span>
+                    <span class="ml-4 font-semibold" style="color: var(--text-primary);" data-lang-key="email">Email</span>
                 </a>
                 <a href="https://www.linkedin.com/in/joseph-hamdy-kamal-5abb7b241/" target="_blank" class="contact-link flex items-center p-3 rounded-xl">
                     <i class="fab fa-linkedin fa-lg w-6 text-center" style="color: var(--accent-color);"></i>
-                    <span class="ml-4 font-semibold" style="color: var(--text-primary);" data-lang-key="linkedin">Profil LinkedIn</span>
+                    <span class="ml-4 font-semibold" style="color: var(--text-primary);" data-lang-key="linkedin">LinkedIn</span>
                 </a>
-                <button id="vcard-button" class="contact-link w-full flex items-center p-3 rounded-xl">
-                    <i class="fas fa-user-plus fa-lg w-6 text-center" style="color: var(--accent-color);"></i>
-                    <span class="ml-4 font-semibold" style="color: var(--text-primary);" data-lang-key="vcard">Ajouter aux contacts</span>
-                </button>
+            </div>
+
+            <!-- ICÔNES SOCIALES -->
+            <div class="mt-6 flex justify-center gap-4">
+                <a href="https://www.linkedin.com/in/joseph-hamdy-kamal-5abb7b241/" class="social-icon linkedin-icon" target="_blank" title="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                </a>
+                <a href="https://wa.me/33767117091" class="social-icon whatsapp-icon" target="_blank" title="WhatsApp">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                    </svg>
+                </a>
+                <a href="mailto:eng.joseph.h.kamal@gmail.com" class="social-icon gmail-icon" target="_blank" title="Gmail">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+                    </svg>
+                </a>
+                <a href="https://josephhk-1.github.io/" class="social-icon portfolio-icon" target="_blank" title="Portfolio">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="mt-6 text-center text-xs" style="color: var(--text-secondary);">
+                <span data-lang-key="footer">Créé par</span> <a href="https://joefordesign.com" target="_blank" style="color: var(--accent-color); text-decoration: none; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">joefordesign.com</a>
             </div>
         </div>
     </div>
@@ -158,10 +285,10 @@
         document.addEventListener('DOMContentLoaded', () => {
             // --- TRADUCTIONS ---
             const translations = {
-                fr: { name: "Joseph HAMDY KAMAL", title: "Chef de Projet Digital | UI/UX Designer", portfolio: "Portfolio", website: "Khayal-Co", whatsapp: "Contacter sur WhatsApp", email: "M'envoyer un email", linkedin: "Profil LinkedIn", vcard: "Ajouter aux contacts" },
-                en: { name: "Joseph HAMDY KAMAL", title: "Digital Project Manager | UI/UX Designer", portfolio: "Portfolio", website: "Khayal-Co", whatsapp: "Contact on WhatsApp", email: "Send me an email", linkedin: "LinkedIn Profile", vcard: "Add to contacts" },
-                it: { name: "Joseph HAMDY KAMAL", title: "Manager di Progetti Digitali | UI/UX Designer", portfolio: "Portfolio", website: "Khayal-Co", whatsapp: "Contatta su WhatsApp", email: "Inviami un'email", linkedin: "Profilo LinkedIn", vcard: "Aggiungi ai contatti" },
-                ar: { name: "جوزيف حمدي كمال", title: "مدير مشاريع رقمية | مصمم واجهات وتجربة مستخدم", portfolio: "أعمالي", website: "خيال كو", whatsapp: "تواصل عبر واتساب", email: "أرسل بريدًا إلكترونيًا", linkedin: "ملف لينكد إن", vcard: "أضف إلى جهات الاتصال" }
+                fr: { name: "Joseph HAMDY KAMAL", title: "Transformation numérique en motion", portfolio: "Portfolio", vcard: "Contact", whatsapp: "WhatsApp", email: "Email", linkedin: "LinkedIn", footer: "Créé par" },
+                en: { name: "Joseph HAMDY KAMAL", title: "Digital transformation in motion", portfolio: "Portfolio", vcard: "Contact", whatsapp: "WhatsApp", email: "Email", linkedin: "LinkedIn", footer: "Created by" },
+                it: { name: "Joseph HAMDY KAMAL", title: "Trasformazione digitale in movimento", portfolio: "Portfolio", vcard: "Contatto", whatsapp: "WhatsApp", email: "Email", linkedin: "LinkedIn", footer: "Creato da" },
+                ar: { name: "جوزيف حمدي كمال", title: "التحول الرقمي في حركة", portfolio: "أعمالي", vcard: "اتصال", whatsapp: "واتساب", email: "بريد", linkedin: "لينكد إن", footer: "أنشئ بواسطة" }
             };
 
             // --- GESTION LANGUE & THÈME ---
@@ -188,22 +315,22 @@
             const sunIcon = document.getElementById('theme-icon-sun');
             const moonIcon = document.getElementById('theme-icon-moon');
             
-            function applyTheme(isDark) {
-                document.documentElement.classList.toggle('dark', isDark);
-                sunIcon.classList.toggle('hidden', isDark);
-                moonIcon.classList.toggle('hidden', !isDark);
+            function applyTheme(isLight) {
+                document.documentElement.classList.toggle('light', isLight);
+                sunIcon.classList.toggle('hidden', !isLight);
+                moonIcon.classList.toggle('hidden', isLight);
                 if (animationFrameId) cancelAnimationFrame(animationFrameId);
                 initBackgroundShapes();
                 animateBackground();
             }
 
             themeToggle.addEventListener('click', () => {
-                applyTheme(!document.documentElement.classList.contains('dark'));
+                applyTheme(!document.documentElement.classList.contains('light'));
             });
 
             // --- TÉLÉCHARGEMENT VCARD ---
             document.getElementById('vcard-button').addEventListener('click', () => {
-                const vCard = `BEGIN:VCARD\nVERSION:3.0\nFN:Joseph HAMDY KAMAL\nN:HAMDY KAMAL;Joseph;;;\nTITLE:Chef de Projet Digital & Designer\nTEL;TYPE=CELL,VOICE;VALUE=uri:tel:+33-7-67-11-70-91\nEMAIL:eng.joseph.h.kamal@gmail.com\nURL;TYPE=Portfolio:https://josephhk-1.github.io/\nURL;TYPE=work:https://josephhk-1.github.io/Khayal-Co/project-form.html?lang=fr\nORG:Khayal-Co\nEND:VCARD`;
+                const vCard = `BEGIN:VCARD\nVERSION:3.0\nFN:Joseph HAMDY KAMAL\nN:HAMDY KAMAL;Joseph;;;\nTITLE:Chef de Projet Digital & Designer\nTEL;TYPE=CELL,VOICE;VALUE=uri:tel:+33-7-67-11-70-91\nEMAIL:eng.joseph.h.kamal@gmail.com\nURL;TYPE=Portfolio:https://josephhk-1.github.io/\nORG:Khayal-Co\nEND:VCARD`;
                 const blob = new Blob([vCard], { type: 'text/vcard' });
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
@@ -214,7 +341,7 @@
                 document.body.removeChild(a);
             });
 
-            // --- NOUVELLE ANIMATION CANVAS ---
+            // --- ANIMATION CANVAS ---
             const cardContainer = document.getElementById('card-container');
             const canvas = document.getElementById('background-canvas');
             const ctx = canvas.getContext('2d');
@@ -226,7 +353,6 @@
                 canvas.height = cardContainer.offsetHeight;
             }
             
-            // Classe pour les lignes (Ingénieur)
             class Line {
                 constructor(x, y, length, speed, color) {
                     this.x = x;
@@ -268,7 +394,6 @@
                 }
             }
 
-            // Classe pour les courbes (Designer)
             class Curve {
                 constructor(startX, startY, speed, color) {
                     this.x = startX;
@@ -281,6 +406,7 @@
                     this.history = [];
                 }
                 draw() {
+                    if (this.history.length < 2) return;
                     ctx.beginPath();
                     ctx.moveTo(this.history[0].x, this.history[0].y);
                     for (let i = 1; i < this.history.length; i++) {
@@ -306,14 +432,13 @@
                         this.history = [];
                     }
                     
-                    if(this.history.length > 1) this.draw();
+                    this.draw();
                 }
             }
 
             function initBackgroundShapes() {
                 const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim();
                 backgroundShapes = [];
-                // 3 Lignes
                 for(let i=0; i<3; i++){
                     let x = Math.random() * canvas.width;
                     let y = Math.random() * canvas.height;
@@ -322,7 +447,6 @@
                     if(speed === 0) speed = 0.1;
                     backgroundShapes.push(new Line(x, y, length, speed, accentColor));
                 }
-                // 3 Courbes
                 for(let i=0; i<3; i++){
                     let x = Math.random() * canvas.width;
                     let y = Math.random() * canvas.height;
@@ -341,8 +465,7 @@
 
             // --- INITIALISATION ---
             setCanvasSize();
-            const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)').matches;
-            applyTheme(prefersDark);
+            applyTheme(false); // Mode sombre par défaut
             setLanguage('fr');
             
             window.addEventListener('resize', () => {
